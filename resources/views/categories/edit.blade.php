@@ -51,17 +51,19 @@
       </div>
     </form>
 
-    <div class='appForm-delete'>
-      <form action='/categories/{{ $category->id }}' method='POST'>
-        @method('DELETE')
-        @csrf
-        <button class='button is-danger' type='submit'>
-              <span class="icon is-small">
-                <i class="fas fa-trash-alt"></i>
-              </span>
-          <span>Удалить запись</span>
-        </button>
-      </form>
-    </div>
+    @if($category->drugs->count() == 0)
+      <div class='appForm-delete'>
+        <form action='/categories/{{ $category->id }}' method='POST'>
+          @method('DELETE')
+          @csrf
+          <button class='button is-danger' type='submit'>
+                <span class="icon is-small">
+                  <i class="fas fa-trash-alt"></i>
+                </span>
+            <span>Удалить запись</span>
+          </button>
+        </form>
+      </div>
+    @endif
   </div>
 @endsection
