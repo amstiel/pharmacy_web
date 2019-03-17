@@ -26,5 +26,9 @@
       <a class='button is-primary'
          href='/pricelist'>Прайслист по категориям</a>
     </div>
+    <div class='column is-half'>
+      <a class='button is-primary'
+         href='/sales'>Список продаж по годам</a>
+    </div>
   </div>
 @endsection

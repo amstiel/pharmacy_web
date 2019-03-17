@@ -18,3 +18,4 @@ Route::resource('/providers', 'ProviderController');
 Route::resource('/categories', 'CategoryController');
 Route::get('/providers-by-cities', 'ReportController@providersByCities');
 Route::get('/pricelist', 'ReportController@pricelist');
+Route::get('/sales', 'ReportController@sales');
