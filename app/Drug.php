@@ -29,6 +29,10 @@ class Drug extends Model
         return $this->belongsTo(Transaction::class);
     }
 
+    public function getFormattedPrice()
+    {
+        return number_format($this->price, 2, '.', ' ').' ₽';
+    }
 //    public function getFormattedPrice()
 //    {
 //        return \money_format('%.2n', $this->price);
