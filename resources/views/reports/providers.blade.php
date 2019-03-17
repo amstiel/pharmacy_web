@@ -29,14 +29,22 @@
             @foreach($providers as $provider)
                 @if($provider->city == $city)
                   <tr>
-                    <td>
-                      <p>{{ $provider->title }}</p>
+                    <td style='width: 33%'>
+                      <p>
+                        <a href="/providers/{{ $provider->id }}">
+                          {{ $provider->title }}
+                        </a>
+                      </p>
                     </td>
-                    <td>
+                    <td style='width: 33%'>
                       <p>{{ $provider->manager }}</p>
                     </td>
-                    <td style='white-space: nowrap'>
-                      <p>{{ $provider->phone }}</p>
+                    <td style='white-space: nowrap; width: 33%'>
+                      <p>
+                        <a href="tel:{{ $provider->phone }}">
+                          {{ $provider->phone }}
+                        </a>
+                      </p>
                     </td>
                   </tr>
                 @endif
