@@ -13,12 +13,20 @@
 
     <div class='field'>
       <p class='label'>Поставщик</p>
-      <p>{{ $drug->provider->title }}</p>
+      <p>
+        <a href="/providers/{{ $drug->provider->id }}">
+          {{ $drug->provider->title }}
+        </a>
+      </p>
     </div>
 
     <div class='field'>
       <p class='label'>Категория</p>
-      {{--<p>{{ $drug->title }}</p>--}}
+      <p>
+        <a href="/categories/{{ $drug->category->id }}">
+          {{ $drug->category->title }}
+        </a>
+      </p>
     </div>
 
     <div class='field'>

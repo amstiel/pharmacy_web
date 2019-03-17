@@ -19,7 +19,7 @@
         <td>
           <a href="/categories/{{ $category->id }}">{{ $category->title }}</a>
         </td>
-        <td style='max-width: 200px'>
+        <td style='max-width: 600px'>
           {{ $category->description }}
         </td>
       </tr>

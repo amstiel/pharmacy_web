@@ -50,9 +50,11 @@ class DrugsController extends Controller
     public function edit(Drug $drug)
     {
         $providers = Provider::all();
+        $categories = Category::all();
         return view('drugs.edit', [
             'drug' => $drug,
             'providers' => $providers,
+            'categories' => $categories,
         ]);
     }
 

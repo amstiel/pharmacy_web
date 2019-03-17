@@ -41,7 +41,7 @@
             <select id='category_id' name='category_id' class='is-fullwidth'>
               @foreach($categories as $category)
                 <option value='{{ $category->id }}'
-                  {{ $provider->id == $drug->provider_id ? 'selected' : '' }}>
+                  {{ $category->id == $drug->category_id ? 'selected' : '' }}>
                   {{ $category->title }}
                 </option>
               @endforeach
