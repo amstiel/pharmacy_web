@@ -16,3 +16,4 @@ Route::resource('/transactions', 'TransactionController');
 Route::resource('/drugs', 'DrugsController');
 Route::resource('/providers', 'ProviderController');
 Route::resource('/categories', 'CategoryController');
+Route::get('/providers-by-cities', 'ReportController@providersByCities');
