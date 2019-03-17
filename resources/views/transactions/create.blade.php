@@ -6,26 +6,36 @@
 
 @section('content')
   <div class='box appForm-container'>
-    <form action='/categories' method='POST'>
+    <form action='/transactions' method='POST'>
       @csrf
       <div class='field'>
-        <label for='title' class='label'>Наименование</label>
+        <label for='drug_id' class='label'>Препарат</label>
         <div class='control'>
-          <input class="input" type='text' id='title' name='title' required
-                 placeholder='Введите наименование категории'>
+          <div class="select is-fullwidth">
+            <select id='drug_id' name='drug_id' class='is-fullwidth'>
+              @foreach($drugs as $drug)
+                <option value='{{ $drug->id }}'>
+                  {{ $drug->title }}
+                </option>
+              @endforeach
+            </select>
+          </div>
         </div>
       </div>
 
       <div class='field'>
-        <label for='description' class='label'>Описание</label>
+        <label for='date' class='label'>Дата</label>
         <div class='control'>
-          <textarea class='textarea'
-                    name='description'
-                    id='description'
-                    cols='30'
-                    required
-                    placeholder='Введите описание категории'
-                    rows='10'></textarea>
+          <input class="input" type='date' id='date' name='date' required
+                 placeholder='Выберите дату'>
+        </div>
+      </div>
+
+      <div class='field'>
+        <label for='amount' class='label'>Колличество</label>
+        <div class='control'>
+          <input class="input" type='number' id='amount' name='amount' required
+                 placeholder='Введите кол-во'>
         </div>
       </div>
 
@@ -35,7 +45,7 @@
               <span class="icon is-small">
                 <i class="fas fa-plus"></i>
               </span>
-            <span>Добавить категорию</span>
+            <span>Добавить транзакцию</span>
           </button>
         </div>
 

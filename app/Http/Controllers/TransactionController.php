@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Drug;
 use App\Provider;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -15,9 +17,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
+        $transactions = Transaction::all();
 
-        return view('providers.index', ['providers' => $providers]);
+        return view('transactions.index', ['transactions' => $transactions]);
     }
 
     /**
@@ -27,7 +29,8 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $drugs = Drug::all();
+        return view('transactions.create', ['drugs' => $drugs]);
     }
 
     /**
@@ -36,9 +39,21 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Transaction $transaction)
     {
-        //
+        $attributes = request()->validate([
+            'drug_id' => 'required',
+            'date' => 'required',
+            'amount' => 'required',
+        ]);
+
+        $transaction->drug_id = $attributes['drug_id'];
+        $transaction->created_at = $attributes['date'];
+        $transaction->amount = $attributes['amount'];
+        $transaction->timestamps = false;
+        $transaction->save();
+
+        return redirect('/transactions');
     }
 
     /**
@@ -49,7 +64,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('transactions.show', ['transaction' => $transaction]);
     }
 
     /**
@@ -60,7 +75,8 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        $drugs = Drug::all();
+        return view('transactions.edit', ['transaction' => $transaction, 'drugs' => $drugs]);
     }
 
     /**
@@ -70,9 +86,21 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Transaction $transaction)
     {
-        //
+        $attributes = request()->validate([
+            'drug_id' => 'required',
+            'date' => 'required',
+            'amount' => 'required',
+        ]);
+
+        $transaction->drug_id = $attributes['drug_id'];
+        $transaction->created_at = $attributes['date'];
+        $transaction->amount = $attributes['amount'];
+        $transaction->timestamps = false;
+        $transaction->save();
+
+        return redirect('/transactions');
     }
 
     /**
@@ -83,6 +111,7 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect('/transactions');
     }
 }

@@ -11419,9 +11419,10 @@ label.panel-block:hover {
 }
 
 .appForm-container {
-  max-width: 600px;
+  width: 600px;
   position: relative;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 .appForm-actions {

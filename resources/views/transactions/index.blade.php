@@ -8,9 +8,11 @@
   <table class='table appTable'>
     <thead>
     <tr>
+      <th>Номер транзакции</th>
       <th>Дата продажи</th>
       <th>Препарат</th>
       <th>Колличество</th>
+      <th></th>
     </tr>
     </thead>
 
@@ -18,7 +20,10 @@
     @foreach($transactions as $transaction)
       <tr>
         <td>
-          {{ $transaction->date }}
+          {{ $transaction->id }}
+        </td>
+        <td>
+          {{ date_format($transaction->created_at, "d.m.Y") }}
         </td>
         <td>
           <a href="/drugs/{{ $transaction->drug->id }}">
@@ -27,6 +32,10 @@
         </td>
         <td>
           {{ $transaction->amount }}
+        </td>
+        <td>
+          <a href='/transactions/{{ $transaction->id }}'
+             class='button is-primary'>Подробнее</a>
         </td>
       </tr>
     @endforeach
