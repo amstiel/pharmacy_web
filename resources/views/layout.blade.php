@@ -7,7 +7,7 @@
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <link rel='stylesheet' href='/css/app.css'>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <title>База данных «Аптека»</title>
+  <title>Аптека «Лечфарм+»</title>
 </head>
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -42,13 +42,26 @@
 
       </div>
     </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href='/transactions/create'>
+            <span class='icon is-small'>
+              <i class="fas fa-receipt"></i>
+              </span>
+            <strong>Оформить продажу</strong>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 <div class='container' style='padding: 48px 16px 16px'>
   <div class='columns is-centered'>
     <div class='column is-narrow'>
       @section('title')
-        <h1 class='title appTitle'>Аптека</h1>
+        <h1 class='title appTitle'>Аптека «Лечфарм+»</h1>
       @show()
       @yield('content')
     </div>

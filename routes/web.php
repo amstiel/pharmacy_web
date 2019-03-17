@@ -19,3 +19,4 @@ Route::resource('/categories', 'CategoryController');
 Route::get('/providers-by-cities', 'ReportController@providersByCities');
 Route::get('/pricelist', 'ReportController@pricelist');
 Route::get('/sales', 'ReportController@sales');
+Route::get('/reciepts/{id}', 'ReportController@reciept');

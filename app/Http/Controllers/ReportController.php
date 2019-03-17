@@ -32,6 +32,12 @@ class ReportController extends Controller
         ]);
     }
 
+    public function reciept($id)
+    {
+        $transaction = Transaction::find($id);
+        return view('reports.receipt', ['transaction' => $transaction]);
+    }
+
     public function sales()
     {
         $months = [
@@ -62,7 +68,7 @@ class ReportController extends Controller
                 $formattedTransactions[$transaction->created_at->month] = [];
                 array_push($formattedTransactions[$transaction->created_at->month], $transaction);
             } else {
-                $formattedTransactions[$transaction->created_at->month] = $transaction;
+                array_push($formattedTransactions[$transaction->created_at->month], $transaction);
             }
 //            $formattedTransactions[$transaction->created_at->month] = $transaction
         }

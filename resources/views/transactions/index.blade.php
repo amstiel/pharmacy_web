@@ -35,7 +35,18 @@
         </td>
         <td>
           <a href='/transactions/{{ $transaction->id }}'
-             class='button is-primary'>Подробнее</a>
+             class='button is-primary'>
+            <span class='icon is-small'>
+              <i class="fas fa-info-circle"></i>
+              </span>
+            <span>Подробнее</span></a>
+          {{--<a href='/reciepts/{{ $transaction->id }}'--}}
+             {{--class='button is-info'>--}}
+            {{--<span class='icon is-small'>--}}
+              {{--<i class="fas fa-receipt"></i>--}}
+              {{--</span>--}}
+            {{--<span>Чек</span>--}}
+          {{--</a>--}}
         </td>
       </tr>
     @endforeach

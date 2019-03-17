@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-  <h1 class='title appTitle'>Добавление нового поставщика</h1>
+  <h1 class='title appTitle'>Редактирование записи о поставщике «{{ $provider->title }}»</h1>
 @endsection
 
 @section('content')

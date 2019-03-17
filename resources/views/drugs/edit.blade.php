@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-  <h1 class='title appTitle'>Редактирование записи о препарате {{ $drug->title }}</h1>
+  <h1 class='title appTitle'>Редактирование записи о препарате «{{ $drug->title }}»</h1>
 @endsection
 
 @section('content')
