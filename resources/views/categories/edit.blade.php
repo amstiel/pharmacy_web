@@ -27,9 +27,7 @@
                     cols='30'
                     required
                     placeholder='Введите описание категории'
-                    rows='10'>
-            {{ $category->description }}
-          </textarea>
+                    rows='10'>{{ $category->description }}</textarea>
         </div>
       </div>
 
