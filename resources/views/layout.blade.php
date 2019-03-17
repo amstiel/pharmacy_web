@@ -50,7 +50,7 @@
             <span class='icon is-small'>
               <i class="fas fa-receipt"></i>
               </span>
-            <strong>Оформить продажу</strong>
+            <span>Оформить продажу</span>
           </a>
         </div>
       </div>
@@ -61,6 +61,9 @@
   <div class='columns is-centered'>
     <div class='column is-narrow'>
       @section('title')
+        <div class='has-text-centered' style='margin-bottom: 1rem'>
+          <img src='/images/logo.svg' width='80' height='80' alt='Аптека «Лечфарм+»'>
+        </div>
         <h1 class='title appTitle'>Аптека «Лечфарм+»</h1>
       @show()
       @yield('content')

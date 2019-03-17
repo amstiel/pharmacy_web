@@ -27,7 +27,7 @@
         <label for='date' class='label'>Дата</label>
         <div class='control'>
           <input class="input" type='date' id='date' name='date' required
-                 placeholder='Выберите дату'>
+                 placeholder='Выберите дату' value='{{ date("Y-m-d") }}'>
         </div>
       </div>
 

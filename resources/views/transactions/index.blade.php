@@ -12,6 +12,7 @@
       <th>Дата продажи</th>
       <th>Препарат</th>
       <th>Колличество</th>
+      <th class='has-text-right'>Сумма</th>
       <th></th>
     </tr>
     </thead>
@@ -32,6 +33,9 @@
         </td>
         <td>
           {{ $transaction->amount }}
+        </td>
+        <td class='has-text-right'>
+          {{number_format($transaction->drug->price * $transaction->amount, 2, '.', ' ').' ₽'}}
         </td>
         <td>
           <a href='/transactions/{{ $transaction->id }}'

@@ -25,6 +25,11 @@
       <p>{{ $transaction->amount }}</p>
     </div>
 
+    <div class='field'>
+      <p class='label'>Сумма транзакции</p>
+      <p>{{number_format($transaction->drug->price * $transaction->amount, 2, '.', ' ').' ₽'}}</p>
+    </div>
+
     <div class='columns appForm-actions'>
       <div class='column is-narrow'>
         <a href='/transactions/{{ $transaction->id }}/edit'
