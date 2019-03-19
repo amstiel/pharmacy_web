@@ -17,8 +17,8 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('drug_id');
             $table->date('created_at');
-            $table->unsignedInteger('amount');
-//            $table->timestamps();
+            $table->unsignedInteger('revenue');
+            $table->unsignedInteger('expense');
         });
     }
 

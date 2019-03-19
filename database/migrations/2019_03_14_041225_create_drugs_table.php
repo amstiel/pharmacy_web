@@ -20,7 +20,7 @@ class CreateDrugsTable extends Migration
             $table->unsignedInteger('category_id'); // Ключ категории препарата
             $table->text('measure'); // Единица измерения/фасовки
             $table->float('price'); // Цена в рублях
-//          $table->timestamps();
+            $table->integer('balance'); // Кол-во на складе
         });
     }
 
