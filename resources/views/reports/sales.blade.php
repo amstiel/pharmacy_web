@@ -36,42 +36,58 @@
             </div>
           </div>
         </section>
-        @empty($transactions[$index])
+        @empty($sales[$index])
           <div class="notification is-info has-text-centered" style='margin-top: 0.5rem'>
-            Транзакций нет
+            Продаж нет
           </div>
         @endempty
-        @isset($transactions[$index])
+        @isset($sales[$index])
           <table class='table is-fullwidth'>
             <thead>
               <tr>
-                <th>Номер</th>
+                <th>Номер чека</th>
                 <th>Дата</th>
-                <th>Препарат</th>
-                <th>Кол-во</th>
+                <th>Препараты</th>
+                {{--<th>Кол-во</th>--}}
                 <th class='has-text-right'>Сумма</th>
               </tr>
             </thead>
             <tbody>
-            @foreach($transactions[$index] as $trans)
+            @foreach($sales[$index] as $sale)
               <tr>
                 <td>
-                  {{ $trans->id }}
+                  {{ $sale->id }}
                 </td>
                 <td>
-                  {{ date_format($trans->created_at, "d.m.Y") }}
+                  {{ date_format($sale->created_at, "d.m.Y") }}
                 </td>
                 <td>
-                  <a href='/drugs/{{ $trans->drug->id }}'>
-                    {{ $trans->drug->title }}
-                  </a>
-                </td>
-                <td>
-                  {{ $trans->amount }}
+                  @foreach($sale->drugs as $drug)
+                    <p>
+                      <a href='/drugs/{{ $drug->id }}'>
+                        {{ $drug->title }}
+                      </a>
+                      x
+                      {{ $drug->pivot->amount }}
+                    </p>
+                  @endforeach
                 </td>
                 <td class='has-text-right'>
-                  {{number_format($trans->drug->price * $trans->amount, 2, '.', ' ').' ₽'}}
+                  {{ number_format($sale->drugs->reduce(function($sum, $drug) {
+                    return $sum + $drug->price;
+                  }), 2, '.', ' ').' ₽'}}
                 </td>
+                {{--<td>--}}
+                  {{--<a href='/drugs/{{ $trans->drug->id }}'>--}}
+                    {{--{{ $trans->drug->title }}--}}
+                  {{--</a>--}}
+                {{--</td>--}}
+                {{--<td>--}}
+                  {{--{{ $trans->amount }}--}}
+                {{--</td>--}}
+                {{--<td class='has-text-right'>--}}
+                  {{--{{number_format($trans->drug->price * $trans->amount, 2, '.', ' ').' ₽'}}--}}
+                {{--</td>--}}
               </tr>
             @endforeach
             </tbody>

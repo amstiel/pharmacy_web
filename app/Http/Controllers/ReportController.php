@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Drug;
 use App\Provider;
+use App\Sale;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -60,15 +61,27 @@ class ReportController extends Controller
         $year = array_key_exists('year', $params) ? $params['year'] : $max_year;
         if ($year > $max_year) $year = $max_year;
         $currentMonth = now()->month;
-        $transactions = Transaction::whereYear('created_at', $year)->get();
-        $formattedTransactions = [];
+        $sales = Sale::whereYear('created_at', $year)->get();
 
-        foreach ($transactions as $transaction) {
-            if(!array_key_exists($transaction->created_at->month, $formattedTransactions)) {
-                $formattedTransactions[$transaction->created_at->month] = [];
-                array_push($formattedTransactions[$transaction->created_at->month], $transaction);
+//        $transactions = Transaction::whereYear('created_at', $year)->get();
+        $formattedSales = [];
+
+//        foreach ($transactions as $transaction) {
+//            if(!array_key_exists($transaction->created_at->month, $formattedTransactions)) {
+//                $formattedTransactions[$transaction->created_at->month] = [];
+//                array_push($formattedTransactions[$transaction->created_at->month], $transaction);
+//            } else {
+//                array_push($formattedTransactions[$transaction->created_at->month], $transaction);
+//            }
+////            $formattedTransactions[$transaction->created_at->month] = $transaction
+//        }
+
+        foreach ($sales as $sale) {
+            if(!array_key_exists($sale->created_at->month, $formattedSales)) {
+                $formattedSales[$sale->created_at->month] = [];
+                array_push($formattedSales[$sale->created_at->month], $sale);
             } else {
-                array_push($formattedTransactions[$transaction->created_at->month], $transaction);
+                array_push($formattedSales[$sale->created_at->month], $sale);
             }
 //            $formattedTransactions[$transaction->created_at->month] = $transaction
         }
@@ -79,7 +92,7 @@ class ReportController extends Controller
             'year' => $year,
             'max_year' => $max_year,
             'min_year' => $min_year,
-            'transactions' => $formattedTransactions,
+            'sales' => $formattedSales,
             'months' => $months,
             'current_month' => $currentMonth,
         ]);

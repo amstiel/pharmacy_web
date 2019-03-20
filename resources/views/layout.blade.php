@@ -46,7 +46,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" href='/transactions/create'>
+          <a class="button is-primary" href='/create-sale'>
             <span class='icon is-small'>
               <i class="fas fa-receipt"></i>
               </span>
@@ -66,9 +66,12 @@
         </div>
         <h1 class='title appTitle'>Аптека «Лечфарм+»</h1>
       @show()
-      @yield('content')
+      <div id='app'>
+        @yield('content')
+      </div>
     </div>
   </div>
 </div>
+<script src='/js/app.js'></script>
 </body>
 </html>

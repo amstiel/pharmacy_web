@@ -7,7 +7,7 @@ use App\Drug;
 use App\Provider;
 use Illuminate\Http\Request;
 
-class DrugsController extends Controller
+class DrugController extends Controller
 {
     public function index() {
         $drugs = Drug::all();

@@ -13,10 +13,15 @@
 
 Route::view('/', 'index');
 Route::resource('/transactions', 'TransactionController');
-Route::resource('/drugs', 'DrugsController');
+Route::resource('/drugs', 'DrugController');
 Route::resource('/providers', 'ProviderController');
 Route::resource('/categories', 'CategoryController');
 Route::get('/providers-by-cities', 'ReportController@providersByCities');
 Route::get('/pricelist', 'ReportController@pricelist');
 Route::get('/sales', 'ReportController@sales');
 Route::get('/reciepts/{id}', 'ReportController@reciept');
+
+//Route::view('/create-sale', ' ');
+
+Route::get('/create-sale', 'SaleController@create');
+Route::post('/sales', 'SaleController@store');
