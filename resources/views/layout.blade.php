@@ -10,7 +10,7 @@
   <title>Аптека «Лечфарм+»</title>
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-hidden-print" role="navigation" aria-label="main navigation">
   <div class='container'>
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -66,6 +66,7 @@
         </div>
         <h1 class='title appTitle'>Аптека «Лечфарм+»</h1>
       @show()
+      @yield('summary')
       <div id='app'>
         @yield('content')
       </div>

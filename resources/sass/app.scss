@@ -47,3 +47,11 @@
     background-color: #fafafa;
     color: #3490dc;
 }
+
+.is-hidden-print {
+    @media print {
+        display: none;
+    }
+}
+
+@page {size: A4;max-height:100%; max-width:100%}

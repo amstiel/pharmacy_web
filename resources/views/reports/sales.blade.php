@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title')
+  <div class='is-hidden-print' style='margin-bottom: 1rem'>
   <div class='columns is-vcentered'>
     <div class='column is-narrow'>
       <h3>Выберите год: </h3>
@@ -18,6 +19,15 @@
         </div>
       </form>
     </div>
+    <div class='is-narrow'>
+      <button class='button is-warning is-hidden-print' onclick='window.print()'>
+        <span class='icon is-small'>
+          <i class='fas fa-print'></i>
+        </span>
+        <span>Печать</span>
+      </button>
+    </div>
+  </div>
   </div>
   <h1 class='title appTitle'>Список продаж за {{ $year }} год</h1>
 @endsection
@@ -56,7 +66,9 @@
             @foreach($sales[$index] as $sale)
               <tr>
                 <td>
-                  {{ $sale->id }}
+                  <a href='/receipts/{{ $sale->id }}'>
+                    {{ $sale->id }}
+                  </a>
                 </td>
                 <td>
                   {{ date_format($sale->created_at, "d.m.Y") }}

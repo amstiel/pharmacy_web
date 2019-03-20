@@ -33,10 +33,10 @@ class ReportController extends Controller
         ]);
     }
 
-    public function reciept($id)
+    public function receipt($id)
     {
-        $transaction = Transaction::find($id);
-        return view('reports.receipt', ['transaction' => $transaction]);
+        $sale = Sale::find($id);
+        return view('reports.receipt', ['sale' => $sale]);
     }
 
     public function sales()
