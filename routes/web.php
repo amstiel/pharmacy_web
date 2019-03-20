@@ -19,9 +19,14 @@ Route::resource('/categories', 'CategoryController');
 Route::get('/providers-by-cities', 'ReportController@providersByCities');
 Route::get('/pricelist', 'ReportController@pricelist');
 Route::get('/sales', 'ReportController@sales');
+Route::get('/sales-list', 'ReportController@salesList');
 Route::get('/receipts/{id}', 'ReportController@receipt');
 
 //Route::view('/create-sale', ' ');
 
 Route::get('/create-sale', 'SaleController@create');
 Route::post('/sales', 'SaleController@store');
+
+Route::post('/transactions/refresh', 'TransactionController@refresh');
+Route::get('add-transaction', 'TransactionController@showAdd');
+Route::get('remove-transaction', 'TransactionController@showRemove');

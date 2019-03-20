@@ -1,13 +1,13 @@
 @extends('layout')
 
 @section('title')
-  <h1 class='title appTitle'>Информация о транзакции № {{ $transaction->id }}</h1>
+  <h1 class='title appTitle'>Информация об операции складе</h1>
 @endsection
 
 @section('content')
   <div class='box appForm-container'>
     <div class='field'>
-      <p class='label'>Дата продажи</p>
+      <p class='label'>Дата операции</p>
       <p>{{ date_format($transaction->created_at, "d.m.Y") }}</p>
     </div>
 
@@ -21,24 +21,27 @@
     </div>
 
     <div class='field'>
-      <p class='label'>Кол-во проданного препарата</p>
-      <p>{{ $transaction->amount }}</p>
+      <p class='label'>Кол-во принятого товара</p>
+      <p>{{ $transaction->revenue }}</p>
     </div>
 
     <div class='field'>
-      <p class='label'>Сумма транзакции</p>
-      <p>{{number_format($transaction->drug->price * $transaction->amount, 2, '.', ' ').' ₽'}}</p>
+      <p class='label'>Кол-во списанного товара</p>
+      <p>{{ $transaction->expense }}</p>
     </div>
 
     <div class='columns appForm-actions'>
       <div class='column is-narrow'>
-        <a href='/transactions/{{ $transaction->id }}/edit'
-           class='button is-info'>
-              <span class="icon is-small">
-                <i class="fas fa-edit"></i>
-              </span>
-          <span>Изменить запись</span>
-        </a>
+        <form action='/transactions/{{ $transaction->id }}' method='POST'>
+          @method('DELETE')
+          @csrf
+          <button class='button is-danger' type='submit'>
+                <span class="icon is-small">
+                  <i class="fas fa-trash-alt"></i>
+                </span>
+            <span>Удалить запись</span>
+          </button>
+        </form>
       </div>
 
       <div class='column is-narrow'>

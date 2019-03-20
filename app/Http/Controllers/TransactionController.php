@@ -17,7 +17,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::orderBy('created_at')->get();
 
         return view('transactions.index', ['transactions' => $transactions]);
     }
@@ -31,6 +31,67 @@ class TransactionController extends Controller
     {
         $drugs = Drug::all();
         return view('transactions.create', ['drugs' => $drugs]);
+    }
+
+    public function refresh(Request $request)
+    {
+        $transaction = Transaction::where('created_at', $request->input('date'))
+            ->where('drug_id', $request->input('drug_id'))->get()->last()
+            ? Transaction::where('created_at', $request->input('date'))->get()->last()
+            : new Transaction();
+
+        $requerstRevenue = $request->input('revenue') ? $request->input('revenue') : 0;
+        $requerstExpense = $request->input('expense') ? $request->input('expense') : 0;
+
+        $newRevenue = $transaction->revenue
+            ? $transaction->revenue + $requerstRevenue
+            : $requerstRevenue;
+
+        $newExpense = $transaction->expense
+            ? $transaction->expense + $requerstExpense
+            : $requerstExpense;
+
+        $transaction->created_at = $request->input('date');
+        $transaction->revenue = $newRevenue;
+        $transaction->drug_id = $request->input('drug_id');
+        $transaction->expense = $newExpense;
+        $transaction->timestamps = false;
+        $transaction->save();
+
+        return redirect('/transactions');
+    }
+
+    public function remove(Request $request)
+    {
+        $transaction = Transaction::where('created_at', $request->input('date'))
+            ->where('drug_id', $request->input('drug_id'))->get()->last()
+            ? Transaction::where('created_at', $request->input('date'))->get()->last()
+            : new Transaction();
+
+        $newExpense = $transaction->expense
+            ? $transaction->revenue + $request->input('amount')
+            : $request->input('amount');
+
+        $transaction->created_at = $request->input('date');
+        $transaction->revenue = $newRevenue;
+        $transaction->drug_id = $request->input('drug_id');
+        $transaction->expense = 0;
+        $transaction->timestamps = false;
+        $transaction->save();
+
+        return redirect('/transactions');
+    }
+
+    public function showAdd()
+    {
+        $drugs = Drug::all();
+        return view('transactions.add', ['drugs' => $drugs]);
+    }
+
+    public function showRemove()
+    {
+        $drugs = Drug::all();
+        return view('transactions.remove', ['drugs' => $drugs]);
     }
 
     /**

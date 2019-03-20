@@ -1,18 +1,17 @@
 @extends('layout')
 
 @section('title')
-  <h1 class='title appTitle'>Список транзакций</h1>
+  <h1 class='title appTitle'>Движение товара на складе</h1>
 @endsection
 
 @section('content')
   <table class='table appTable'>
     <thead>
     <tr>
-      <th>Номер транзакции</th>
-      <th>Дата продажи</th>
+      <th>Дата</th>
       <th>Препарат</th>
-      <th>Колличество</th>
-      <th class='has-text-right'>Сумма</th>
+      <th>Приход</th>
+      <th>Расход</th>
       <th></th>
     </tr>
     </thead>
@@ -21,9 +20,6 @@
     @foreach($transactions as $transaction)
       <tr>
         <td>
-          {{ $transaction->id }}
-        </td>
-        <td>
           {{ date_format($transaction->created_at, "d.m.Y") }}
         </td>
         <td>
@@ -31,11 +27,11 @@
             {{ $transaction->drug->title }}
           </a>
         </td>
-        <td>
-          {{ $transaction->amount }}
+        <td class='has-text-right'>
+          {{ $transaction->revenue }}
         </td>
         <td class='has-text-right'>
-          {{number_format($transaction->drug->price * $transaction->amount, 2, '.', ' ').' ₽'}}
+          {{ $transaction->expense }}
         </td>
         <td>
           <a href='/transactions/{{ $transaction->id }}'
@@ -56,10 +52,16 @@
     @endforeach
     </tbody>
   </table>
-  <a href='/transactions/create' class='button is-success'>
+  <a href='/add-transaction' class='button is-success'>
     <span class="icon is-small">
       <i class="fas fa-plus"></i>
     </span>
-    <span>Оформить продажу</span>
+    <span>Внести препарат</span>
+  </a>
+  <a href='/remove-transaction' class='button is-danger'>
+    <span class="icon is-small">
+      <i class="fas fa-minus"></i>
+    </span>
+    <span>Списать препарат</span>
   </a>
 @endsection

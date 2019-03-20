@@ -9,7 +9,8 @@ class Transaction extends Model
     protected $fillable = [
         'drug_id',
         'created_at',
-        'amount'
+        'revenue',
+        'expense'
     ];
 
     public function drug() {

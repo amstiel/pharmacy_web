@@ -8,10 +8,7 @@
   <div class='box appForm-container'>
     <form action='/sales' method='POST' id='create-sale-form'>
       @csrf
-
       <drugs-select :drugs='{!! json_encode($drugs) !!}'></drugs-select>
-
-
     </form>
   </div>
 @endsection

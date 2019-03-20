@@ -55,7 +55,7 @@
       </div>
 
       <div class='column is-narrow'>
-        <button class='button' onclick='window.history.back()'>
+        <button class='button' type='button' onclick='window.history.back()'>
           Отменить
         </button>
       </div>

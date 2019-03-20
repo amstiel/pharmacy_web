@@ -25,19 +25,23 @@
         </a>
 
         <a href='/drugs' class="navbar-item">
-          Таблица препаратов
+          Препараты
+        </a>
+
+        <a href='/sales-list' class="navbar-item">
+          Продажи
         </a>
 
         <a href='/providers' class="navbar-item">
-          Таблица поставщиков
+          Поставщики
         </a>
 
         <a href='/categories' class="navbar-item">
-          Таблица категорий
+          Категории
         </a>
 
         <a href='/transactions' class="navbar-item">
-          Таблица транзакций
+          Движение товара на складе
         </a>
 
       </div>
@@ -48,7 +52,7 @@
         <div class="buttons">
           <a class="button is-primary" href='/create-sale'>
             <span class='icon is-small'>
-              <i class="fas fa-receipt"></i>
+              <i class="fas fa-dollar-sign"></i>
               </span>
             <span>Оформить продажу</span>
           </a>

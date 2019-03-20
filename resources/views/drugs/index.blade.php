@@ -11,7 +11,8 @@
         <th>Наименование препарата</th>
         <th>Поставщик</th>
         <th>Категория</th>
-        <th>Единица измерения/фасофки</th>
+        <th>Кол-во на складе</th>
+        <th>Единица измерения</th>
         <th class='has-text-right'>Цена</th>
       </tr>
     </thead>
@@ -32,6 +33,7 @@
               {{ $drug->category->title }}
             </a>
           </td>
+          <td class='has-text-right'>{{ $drug->balance }}</td>
           <td>{{ $drug->measure }}</td>
           <td class='has-text-right'>
             {{ number_format($drug->price, 2, '.', ' ') }} ₽

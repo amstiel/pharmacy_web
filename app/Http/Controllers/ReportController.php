@@ -39,6 +39,12 @@ class ReportController extends Controller
         return view('reports.receipt', ['sale' => $sale]);
     }
 
+    public function salesList()
+    {
+        $sales = Sale::all();
+        return view('sales-list', ['sales' => $sales]);
+    }
+
     public function sales()
     {
         $months = [

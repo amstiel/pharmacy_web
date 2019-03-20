@@ -35,6 +35,11 @@
     </div>
 
     <div class='field'>
+      <p class='label'>Кол-во на складе</p>
+      <p>{{ $drug->balance }}</p>
+    </div>
+
+    <div class='field'>
       <p class='label'>Цена</p>
       <p>{{ number_format($drug->price, 2, '.', ' ') }} ₽</p>
     </div>

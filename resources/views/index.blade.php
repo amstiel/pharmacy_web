@@ -5,16 +5,16 @@
     <div class='box appForm-container' style='width:330px;'>
       <div class='columns is-multiline'>
         <div class='column is-full'>
-          <a class='button is-primary'
-             href='/drugs/create'>
+          <a class='button is-success'
+             href='/sales-list'>
             <span class='icon is-small'>
-                <i class="fas fa-plus"></i>
+                <i class="fas fa-dollar-sign"></i>
                 </span>
-            <span>Добавить препарат в базу</span>
+            <span>Продажи</span>
           </a>
         </div>
         <div class='column is-full'>
-          <a class='button is-warning'
+          <a class='button is-success'
              href='/drugs'>
             <span class='icon is-small'>
                 <i class="fas fa-list-ol"></i>
@@ -23,6 +23,16 @@
           </a>
         </div>
         <div class='column is-full'>
+          <a class='button is-warning'
+             href='/transactions'>
+            <span class='icon is-small'>
+                <i class="fas fa-exchange-alt"></i>
+                </span>
+            <span>Движение товара на складе</span>
+          </a>
+        </div>
+        <div class='column is-full'>
+          <p class='label'>Отчеты</p>
           <a class='button is-link'
              href='/providers-by-cities'>
             <span class='icon is-small'>

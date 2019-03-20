@@ -11440,3 +11440,15 @@ label.panel-block:hover {
   color: #3490dc;
 }
 
+@media print {
+  .is-hidden-print {
+    display: none;
+  }
+}
+
+@page {
+  size: A4;
+  max-height: 100%;
+  max-width: 100%;
+}
+

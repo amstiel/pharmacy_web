@@ -86,7 +86,7 @@
                 </td>
                 <td class='has-text-right'>
                   {{ number_format($sale->drugs->reduce(function($sum, $drug) {
-                    return $sum + $drug->price;
+                    return $sum + $drug->price * $drug->pivot->amount;
                   }), 2, '.', ' ').' ₽'}}
                 </td>
                 {{--<td>--}}
