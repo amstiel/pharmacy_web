@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+  <h1 class='title appTitle'>Список продаж</h1>
+@endsection
+
 @section('content')
   <table class='table is-fullwidth'>
     <thead>
