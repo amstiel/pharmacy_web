@@ -81,7 +81,7 @@
         this.selectedDrugs.forEach(sd => {
           form.appendChild(createHiddenField('drug_id[]', sd.drug_id))
         });
-        form.validate().submit();
+        form.submit();
       },
       addNewSelector() {
         if (this.selectedDrugs.length === this.drugs.length) return

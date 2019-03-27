@@ -152,18 +152,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 function createHiddenField(name, value) {
   var input = document.createElement('input');
   input.setAttribute('type', 'hidden');
@@ -191,7 +179,7 @@ function createHiddenField(name, value) {
       this.selectedDrugs.forEach(function (sd) {
         form.appendChild(createHiddenField('drug_id[]', sd.drug_id));
       });
-      form.validate().submit();
+      form.submit();
     },
     addNewSelector: function addNewSelector() {
       var _this = this;
@@ -221,7 +209,6 @@ function createHiddenField(name, value) {
       });
     },
     handleSelectInput: function handleSelectInput(drug_id) {
-      debugger;
       if (this.$refs.amountInput[0].value > this.findDrugById(drug_id).balance) this.$refs.amountInput[0].value = this.findDrugById(drug_id).balance;
     }
   }
