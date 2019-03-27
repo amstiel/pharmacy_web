@@ -6,7 +6,8 @@
         <div class='field has-addons'>
           <div class='control is-expanded'>
             <div class="select is-fullwidth">
-              <select name='drg' required class='is-fullwidth' v-model='drugSelector.drug_id'>
+              <select name='drg' required class='is-fullwidth' v-model='drugSelector.drug_id'
+                      @input='handleSelectInput(Number($event.currentTarget.value))'>
                 <option v-for='drug in drugs' :value='drug.id' :disabled='selectedDrugs.some(sd => sd.drug_id === drug.id)'>
                   {{ drug.title }}
                 </option>
@@ -15,7 +16,10 @@
           </div>
           <p class="control">
             <input class="input" type='number' name='amount[]' required
-                   min='1' max='100' step='1' value='1'
+                   ref='amountInput'
+                   min='1' :max='drugs.find(d => d.id === drugSelector.drug_id).balance'
+                   @input='handleAmountInput($event, drugs.find(d => d.id === drugSelector.drug_id).balance)'
+                   step='1' value='1'
                    placeholder='Кол-во'>
           </p>
         </div>
@@ -31,18 +35,6 @@
         </button>
       </div>
     </div>
-    <!--<div class='field'>-->
-      <!--<label class='label'>Препарат</label>-->
-      <!--<div class='control'>-->
-        <!--<div class="select is-fullwidth">-->
-          <!--<select name='drug_id[]' class='is-fullwidth'>-->
-            <!--<option v-for='drug in drugs.filter(d => !selectedDrugs.includes(d.id))' :value='drug.id'>-->
-              <!--{{ drug.title }}-->
-            <!--</option>-->
-          <!--</select>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
     <button type='button' class='button' @click='addNewSelector()'>+</button>
     <div class='columns appForm-actions'>
       <div class='column is-narrow'>
@@ -89,7 +81,7 @@
         this.selectedDrugs.forEach(sd => {
           form.appendChild(createHiddenField('drug_id[]', sd.drug_id))
         });
-        form.submit();
+        form.validate().submit();
       },
       addNewSelector() {
         if (this.selectedDrugs.length === this.drugs.length) return
@@ -98,6 +90,16 @@
       },
       unselectDrug(id) {
         this.selectedDrugs.splice(this.selectedDrugs.findIndex(sd => sd.drug_id === id), 1)
+      },
+      handleAmountInput(ev, max) {
+        if (ev.currentTarget.value > max) ev.currentTarget.value = max;
+        if (ev.currentTarget.value < 1) ev.currentTarget.value = 1;
+      },
+      findDrugById(id) {
+        return this.drugs.find(d => d.id === id);
+      },
+      handleSelectInput(drug_id) {
+        if (this.$refs.amountInput[0].value > this.findDrugById(drug_id).balance) this.$refs.amountInput[0].value = this.findDrugById(drug_id).balance
       }
     }
   }

@@ -160,6 +160,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 function createHiddenField(name, value) {
   var input = document.createElement('input');
   input.setAttribute('type', 'hidden');
@@ -187,7 +191,7 @@ function createHiddenField(name, value) {
       this.selectedDrugs.forEach(function (sd) {
         form.appendChild(createHiddenField('drug_id[]', sd.drug_id));
       });
-      form.submit();
+      form.validate().submit();
     },
     addNewSelector: function addNewSelector() {
       var _this = this;
@@ -206,6 +210,19 @@ function createHiddenField(name, value) {
       this.selectedDrugs.splice(this.selectedDrugs.findIndex(function (sd) {
         return sd.drug_id === id;
       }), 1);
+    },
+    handleAmountInput: function handleAmountInput(ev, max) {
+      if (ev.currentTarget.value > max) ev.currentTarget.value = max;
+      if (ev.currentTarget.value < 1) ev.currentTarget.value = 1;
+    },
+    findDrugById: function findDrugById(id) {
+      return this.drugs.find(function (d) {
+        return d.id === id;
+      });
+    },
+    handleSelectInput: function handleSelectInput(drug_id) {
+      debugger;
+      if (this.$refs.amountInput[0].value > this.findDrugById(drug_id).balance) this.$refs.amountInput[0].value = this.findDrugById(drug_id).balance;
     }
   }
 });
@@ -1390,6 +1407,11 @@ var render = function() {
                       staticClass: "is-fullwidth",
                       attrs: { name: "drg", required: "" },
                       on: {
+                        input: function($event) {
+                          _vm.handleSelectInput(
+                            Number($event.currentTarget.value)
+                          )
+                        },
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
                             .call($event.target.options, function(o) {
@@ -1434,7 +1456,35 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0, true)
+              _c("p", { staticClass: "control" }, [
+                _c("input", {
+                  ref: "amountInput",
+                  refInFor: true,
+                  staticClass: "input",
+                  attrs: {
+                    type: "number",
+                    name: "amount[]",
+                    required: "",
+                    min: "1",
+                    max: _vm.drugs.find(function(d) {
+                      return d.id === drugSelector.drug_id
+                    }).balance,
+                    step: "1",
+                    value: "1",
+                    placeholder: "Кол-во"
+                  },
+                  on: {
+                    input: function($event) {
+                      _vm.handleAmountInput(
+                        $event,
+                        _vm.drugs.find(function(d) {
+                          return d.id === drugSelector.drug_id
+                        }).balance
+                      )
+                    }
+                  }
+                })
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -1451,7 +1501,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._m(1, true)]
+              [_vm._m(0, true)]
             )
           ])
         ])
@@ -1484,37 +1534,17 @@ var render = function() {
                 }
               }
             },
-            [_vm._m(2), _vm._v(" "), _c("span", [_vm._v("Оформить продажу")])]
+            [_vm._m(1), _vm._v(" "), _c("span", [_vm._v("Оформить продажу")])]
           )
         ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(2)
       ])
     ],
     2
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "control" }, [
-      _c("input", {
-        staticClass: "input",
-        attrs: {
-          type: "number",
-          name: "amount[]",
-          required: "",
-          min: "1",
-          max: "100",
-          step: "1",
-          value: "1",
-          placeholder: "Кол-во"
-        }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
