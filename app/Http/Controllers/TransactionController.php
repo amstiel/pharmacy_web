@@ -37,19 +37,20 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::where('created_at', $request->input('date'))
             ->where('drug_id', $request->input('drug_id'))->get()->last()
-            ? Transaction::where('created_at', $request->input('date'))->get()->last()
+            ? Transaction::where('created_at', $request->input('date'))
+                ->where('drug_id', $request->input('drug_id'))->get()->last()
             : new Transaction();
 
-        $requerstRevenue = $request->input('revenue') ? $request->input('revenue') : 0;
-        $requerstExpense = $request->input('expense') ? $request->input('expense') : 0;
+        $requestRevenue = $request->input('revenue') ? $request->input('revenue') : 0;
+        $requestExpense = $request->input('expense') ? $request->input('expense') : 0;
 
         $newRevenue = $transaction->revenue
-            ? $transaction->revenue + $requerstRevenue
-            : $requerstRevenue;
+            ? $transaction->revenue + $requestRevenue
+            : $requestRevenue;
 
         $newExpense = $transaction->expense
-            ? $transaction->expense + $requerstExpense
-            : $requerstExpense;
+            ? $transaction->expense + $requestExpense
+            : $requestExpense;
 
         $transaction->created_at = $request->input('date');
         $transaction->revenue = $newRevenue;
@@ -81,7 +82,7 @@ class TransactionController extends Controller
             : $request->input('amount');
 
         $transaction->created_at = $request->input('date');
-        $transaction->revenue = $newRevenue;
+        $transaction->revenue = $transaction->revenue;
         $transaction->drug_id = $request->input('drug_id');
         $transaction->expense = 0;
         $transaction->timestamps = false;

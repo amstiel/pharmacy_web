@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Drug;
 use App\Sale;
 use App\SaleDrug;
+use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -20,8 +21,10 @@ class SaleController extends Controller
     }
 
     public function store(Request $request) {
+        $saleDate = Carbon::now()->format('Y-m-d');
+
         $sale = new Sale();
-        $sale->created_at =  Carbon::now()->format('Y-m-d');
+        $sale->created_at = $saleDate;
         $sale->timestamps = false;
         $sale->save();
         $saleId = $sale->id;
@@ -40,6 +43,26 @@ class SaleController extends Controller
             $drug->balance = $newBalance;
             $drug->timestamps = false;
             $drug->save();
+
+            $transaction = Transaction::where('created_at', $saleDate)
+                ->where('drug_id', $drugId)->get()->last()
+                ? Transaction::where('created_at',$saleDate)
+                    ->where('drug_id', $drugId)->get()->last()->get()->last()
+                : new Transaction();
+
+            $newRevenue = $transaction->revenue
+                ? $transaction->revenue
+                : 0;
+            $newExpense = $transaction->expense
+                ? $transaction->expense + $amount
+                : $amount;
+
+            $transaction->created_at = $saleDate;
+            $transaction->revenue = $newRevenue;
+            $transaction->drug_id = $drugId;
+            $transaction->expense = $newExpense;
+            $transaction->timestamps = false;
+            $transaction->save();
         }
 
         return redirect('/');
