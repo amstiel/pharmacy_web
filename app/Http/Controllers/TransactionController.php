@@ -58,6 +58,14 @@ class TransactionController extends Controller
         $transaction->timestamps = false;
         $transaction->save();
 
+        $drug = Drug::find($request->input('drug_id'));
+        $newDrugBalance = ($drug->balance + ($newRevenue - $newExpense)) > 0
+            ? $drug->balance + ($newRevenue - $newExpense)
+            : 0;
+        $drug->balance = $newDrugBalance;
+        $drug->timestamps = false;
+        $drug->save();
+
         return redirect('/transactions');
     }
 
