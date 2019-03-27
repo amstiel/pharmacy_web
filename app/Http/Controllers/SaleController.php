@@ -12,7 +12,7 @@ class SaleController extends Controller
 {
     public function create() {
 
-        $drugs = Drug::all();
+        $drugs = Drug::where('balance', '>', 0)->get();
 
         return view('create-sale', [
             'drugs' => $drugs
