@@ -11,7 +11,8 @@ class Drug extends Model
         'provider_id',
         'category_id',
         'measure',
-        'price'
+        'price',
+        'balance',
     ];
 
     public function provider()
